@@ -1,0 +1,49 @@
+body{
+    background-image: url(../images/back1.svg);
+    /*background-size:cover;*/
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+nav ul li {
+    list-style-type: none;
+}
+  
+
+.center_nav {
+    justify-content: space-evenly;
+}
+
+.header__Logo {
+    border-radius: 10px;
+    background-color: brown;
+    width: 80px;
+    height: 80px;
+}
+
+.nav_a {
+    color: #152D54 !important;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.titulo_nav{
+    font-size: 25px;
+}
+
+.titulos_h1{
+    margin-bottom: 20px;
+}
+
+.redes {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.productos_estilo{
+    margin-bottom: 15px;
+    margin-left: 15px;
+}

@@ -1,0 +1,70 @@
+/*Inicio Grids Index*/
+header{
+    grid-area: header;
+    /*padding: 20px;*/
+    background-color: rgb(250, 163, 2);
+    text-align: center;
+}
+
+.grid1{
+    grid-area: titulo;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.grid2{
+    grid-area: filtro;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.grid3{
+    grid-area: productos;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.grids {
+    display: grid;
+    grid-template-areas:
+        "header"
+        "titulo"
+        "filtro"
+        "productos"
+        "footer";
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    width: 100%;
+    height:100%;
+}
+
+footer{
+    grid-area: footer;
+    background-color: rgb(111, 49, 170);
+    margin-top: 53px;
+}
+/*Fin Grids Index*/
+/*Inicio Grids Carrito*/
+.grid_carro{
+    grid-area: carro;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.grids_carrito{
+    display: grid;
+    grid-template-areas:
+        "header"
+        "titulo"
+        "carro"
+        "footer";
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    width: 100%;
+    height:100%;
+}
