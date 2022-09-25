@@ -9,7 +9,7 @@ const iva = 1.21;
 function ingresarProcesador(marca) {
     let procesadorNuevo = marca.toLowerCase()
     while ((procesadorNuevo != "amd") && (procesadorNuevo != "intel")) {
-        procesadorNuevo = prompt("eliga una marca de procesador valida. intel o amd?").toLowerCase();
+        procesadorNuevo = prompt("eliga una marca de procesador valida. intel($300) o amd($150)?").toLowerCase();
     }
     if (procesador === procesadorNuevo) {
         alert("Es el mismo procesador que ya tenias.")
@@ -27,7 +27,7 @@ function ingresarProcesador(marca) {
 function ingresarPlaca(marca) {
     let placaNueva = marca.toLowerCase()
     while ((placaNueva != "nvidia") && (placaNueva != "amd")) {
-        placaNueva = prompt("eliga una marca de placa de video valida. nvidia o amd?").toLowerCase();
+        placaNueva = prompt("eliga una marca de placa de video valida. nvidia($650) o amd($335)?").toLowerCase();
     }
     if (placa === placaNueva) {
         alert("Es la misma placa de video que ya tenias.")
@@ -45,7 +45,7 @@ function ingresarPlaca(marca) {
 function ingresarMemoria(marca) {
     let memoriaNueva = marca.toLowerCase();
     while ((memoriaNueva != "kingstone") && (memoriaNueva != "segate")) {
-        memoriaNueva = prompt("eliga una marca de memoria ram valida. kingstone o segate?").toLowerCase();
+        memoriaNueva = prompt("eliga una marca de memoria ram valida. kingstone($260) o segate($180)?").toLowerCase();
     }
     if (memoria === memoriaNueva) {
         alert("Es la misma memoria ram que ya tenias.")
@@ -67,11 +67,11 @@ function mostrarPc() {
 
 /*Inicio Funcio para armar una pc*/
 function armarPc(){
-    let procesadorPc = prompt("eliga su marca de procesador. intel o amd?").toLowerCase();
+    let procesadorPc = prompt("eliga su marca de procesador. intel ($300) o amd($150)?").toLowerCase();
     ingresarProcesador(procesadorPc)
-    let placaPc = prompt("eliga su marca de placa de video. nvidia o amd?").toLowerCase();
+    let placaPc = prompt("eliga su marca de placa de video. nvidia($650) o amd($335)?").toLowerCase();
     ingresarPlaca(placaPc)
-    let memoriaPc = prompt("eliga su marca de memoria ram. kingstone o segate?").toLowerCase();
+    let memoriaPc = prompt("eliga su marca de memoria ram. kingstone($260) o segate($180)?").toLowerCase();
     ingresarMemoria(memoriaPc)
 }
 /*Fin Funcio para armar una pc*/
