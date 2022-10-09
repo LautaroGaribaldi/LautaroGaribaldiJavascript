@@ -145,6 +145,7 @@ function comprarComponentes(){
             break
         }
     }
+    valorCarrito(carrito);
     alert("Gracias, vuelva pronto!.");
 }
 
