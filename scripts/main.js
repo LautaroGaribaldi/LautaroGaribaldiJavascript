@@ -1,9 +1,12 @@
+let inputComprar
+let aux = 0
 const iva = 1.21;
 const carrito = [];
 
 /*Declaracion clase producto*/
 class Producto {
-    constructor(nombre, categoria, precio, stock) {
+    constructor(id,nombre, categoria, precio, stock) {
+        this.id = id;
         this.nombre = nombre;
         this.categoria = categoria;
         this.precio = precio;
@@ -25,7 +28,9 @@ class Producto {
             this.descuento();
             alert("Se realizo su pedido de " + cantidadNumero + " unidades del producto " + this.nombre);
             alert("El precio por esas unidades es de " + (this.precio * cantidadNumero));
-            carrito.push(new Producto(this.nombre, this.categoria, this.precio, cantidadNumero))  //agrego el objeto comprado al carrito.
+            if (carrito.findIndex(producto => (producto.id === this.id))>=0) {
+                carrito[carrito.findIndex(producto => (producto.id === this.id))].stock += cantidadNumero // verifico si ya hay un producto agregado de ese tipo sino hago push.
+            } else {carrito.push(new Producto(this.id,this.nombre, this.categoria, this.precio, cantidadNumero))}  //agrego el objeto comprado al carrito.
             this.stock -= cantidadNumero;
             this.precio = precioOriginal; // devuelvo el precio original al producto.
 
@@ -36,18 +41,41 @@ class Producto {
 }
 /*Funcion Para sacar el valor total del carrito*/
 function valorCarrito(carrito) {
-    const totalCarrito = carrito.reduce((acumulador, producto) => acumulador + (producto.precio * producto.stock), 0) * 1.21;
+    const totalCarrito = (carrito.reduce((acumulador, producto) => acumulador + (producto.precio * producto.stock), 0) * 1.21).toFixed(2);
     alert("el valor total de la compra es de: $" + totalCarrito)
     return (totalCarrito)
 }
-/*Declaracion productos nuevos*/
-const producto1 = new Producto("Intel", "Procesador", 300, 50);
-const producto2 = new Producto("Amd", "Procesador", 150, 50);
-const producto3 = new Producto("Nvidia", "Placa de video", 650, 50);
-const producto4 = new Producto("Amd", "Placa de video", 335, 50);
-const producto5 = new Producto("Kingstone", "Memoria ram", 260, 50);
-const producto6 = new Producto("Segate", "Electronica", 180, 50);
 
+/*Declaracion productos nuevos*/
+const producto1 = new Producto(01,"Intel", "Procesador", 300, 50);
+const producto2 = new Producto(02,"Amd", "Procesador", 150, 50);
+const producto3 = new Producto(03,"Nvidia", "Placa de video", 650, 50);
+const producto4 = new Producto(04,"Amd", "Placa de video", 335, 50);
+const producto5 = new Producto(05,"Kingstone", "Memoria ram", 260, 50);
+const producto6 = new Producto(06,"Segate", "Memoria ram", 180, 50);
+const listaProductos = [producto1,producto2,producto3,producto4,producto5,producto6]
+
+/*Funcion Crear nuevos productos*/
+
+function crearProducto(){
+    listaProductos.forEach(producto => {if(producto.id > aux){aux = producto.id}}) // guardo en variable auxiliar el ultimo id asignado
+    let id = aux + 1;
+    let nombre = prompt("Cual es el nombre del producto?").toLowerCase();
+    let categoria = prompt("Cual es la categoria del producto?").toLowerCase();
+    let precio = parseFloat(prompt("Cual es el precio del producto?"));
+    while (precio <= 0 || Number.isNaN(precio)) {
+        alert("ingrese una precio valido.");
+        precio = parseFloat(prompt("Cual es el precio del producto?"));
+    }
+    let stock = parseFloat(prompt("Cual es el stock del producto?"));
+    while (stock <= 0 || Number.isNaN(stock)) {
+        alert("ingrese una cantidad valida");
+        stock = parseInt(prompt("Cual es el stock del producto?"));
+    }
+    let productoNuevo = new Producto (id,nombre,categoria,precio,stock)
+    listaProductos.push(productoNuevo)
+    alert("Producto " + nombre + " Creado.")
+}
 /*Inicio Definicion componentes PC y funciones para ingresar mas de 1 elemento*/
 function ingresarProcesador(marca,cantidad) {
     let procesadorNuevo = marca.toLowerCase();
@@ -88,7 +116,7 @@ function ingresarMemoria(marca,cantidad) {
 }
 /*Mostrar los componentes elegidos en armar pc.*/
 function mostrarPc() {
-    console.log("procesador: " + carrito[0].nombre + " placa de video: " + carrito[1].nombre + " Memoria ram: " + carrito[2].nombre);
+    carrito.forEach(producto => console.log(producto.categoria + " " + producto.nombre + " " + " " + producto.stock));
 }
 
 
@@ -146,26 +174,32 @@ function comprarComponentes(){
         }
     }
     valorCarrito(carrito);
-    alert("Gracias, vuelva pronto!.");
 }
 
 /*funcion para comprar pc*/
 
 function comprarPc() {
-    let inputComprar = parseInt(prompt("Desea: 1)Armar una computadora 2)Comprar Componentes 3)Salir"));
-    while (inputComprar != 1 && inputComprar != 2 && inputComprar != 3) {
+    do{
+    inputComprar = parseInt(prompt("Desea: 1)Armar una computadora 2)Comprar Componentes 3)Ver total de compras 4)Crear producto 5)Salir"));
+    while (inputComprar != 1 && inputComprar != 2 && inputComprar != 3 && inputComprar != 4 && inputComprar != 5) {
         alert("Valor ingresado no valido.");
         inputComprar = parseInt(prompt("Desea: 1)Armar una computadora 2)Comprar Componentes 3)Salir"));
     }
     if (inputComprar === 1) {
         armarPc();
         mostrarPc();
-        valorCarrito(carrito);
+        valorCarrito(carrito); // agregar solo valor carrito al salir (3) y solo si el carrito no es vacio. 
     } if(inputComprar === 2){
         comprarComponentes();
-    } else {
-        alert("Gracias, vuelva pronto!.");
+    } if(inputComprar === 3){
+        valorCarrito(carrito);
+    } if(inputComprar === 4){
+        crearProducto();
     }
-}
+} while (inputComprar !== 5)
+alert("Gracias, vuelva pronto!.");
+}   
 
-setTimeout(comprarPc, 100);  
+
+setTimeout(comprarPc, 100);
+
