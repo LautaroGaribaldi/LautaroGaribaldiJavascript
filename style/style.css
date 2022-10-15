@@ -2,7 +2,7 @@ body {
   background-image: url(../images/back1.svg);
   /*background-size:cover;*/
   background-size: cover;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   background-position: center;
 }
 
@@ -33,6 +33,7 @@ nav ul li {
 }
 
 .titulos_h1 {
+  margin-top: 50px;
   margin-bottom: 20px;
 }
 
@@ -75,6 +76,8 @@ header {
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
+  min-height: 432px;
+  margin-bottom: 23px;
 }
 
 .grids {
