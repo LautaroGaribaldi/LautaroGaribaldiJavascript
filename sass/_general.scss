@@ -9,7 +9,14 @@ body{
 nav ul li {
     list-style-type: none;
 }
-  
+
+.filtro{ 
+    background: white;
+    opacity: 0.8;
+    padding: 5px;
+    border: 5px solid black;
+    margin-bottom: 20px;
+}
 
 .center_nav {
     justify-content: space-evenly;
@@ -35,7 +42,7 @@ nav ul li {
 
 .titulos_h1{
     margin-top: 50px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .redes {
@@ -46,5 +53,59 @@ nav ul li {
 
 .productos_estilo{
     margin-bottom: 15px;
-    margin-left: 15px;
+    border: 5px solid rgb(250, 163, 2);
+}
+
+.rango_precio{
+    display: flex;
+    flex-direction: column;
+}
+
+.contenedor_prod{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.cantidad{
+    width: 50px;
+}
+
+/*.itemCarrito{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    
+}
+
+.pCarrito{
+    margin-left: 20px;
+}
+
+.pNombreProducto{
+    width: 177px;
+}*/
+
+.error_rango{
+    color: red;
+}
+
+.error{
+    border: solid red 2px;
+}
+
+#alerta{
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    transition: all 3s;
+}
+
+.alertaBorrar{
+    opacity: 0% !important;
+}
+
+.alertaMostrar{
+    opacity: 100%;
 }

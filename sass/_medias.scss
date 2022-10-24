@@ -1,6 +1,16 @@
-@media screen and (min-width:600px){
+@media screen and (min-width:576px){
+    .productos_estilo{
+        margin-left: 15px;
+    }
+}
+@media screen and (min-width:606px){
     .grid3{
         min-height: 427px;
+    }
+    .rango_precio{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
     }
 }
 

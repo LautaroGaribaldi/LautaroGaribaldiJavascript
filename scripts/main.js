@@ -1,187 +1,43 @@
 let inputComprar
 let aux = 0
 const iva = 1.21;
-const carrito = [];
+let carrito = [];
 const div = document.getElementById("contenedor")
 const filtro = document.getElementById("nombre")
 const card = document.getElementsByClassName("card")
+const btn = document.getElementById("boton_buscar")
+const min =  document.getElementById("minimo")
+const max =  document.getElementById("maximo")
+const rango = document.getElementById("rango")
+const validaRango = document.getElementById("error_rango")
+
 
 /*Declaracion clase producto*/
 class Producto {
-    constructor(id, nombre, categoria, imagen, precio, stock) {
+    constructor(id, nombre, categoria, imagen,miniatura, precio, stock) {
         this.id = id;
         this.nombre = nombre;
         this.categoria = categoria;
         this.imagen = imagen;
+        this.miniatura = miniatura
         this.precio = precio;
         this.stock = stock;
     }
-    descuento() {
-        if (this.precio > 1000) {
-            this.precio = this.precio * 0.9;
-        }
-    }
-    comprar(cantidad) {
-        let cantidadNumero = parseInt(cantidad);
-        let precioOriginal = this.precio;
-        if (this.stock > 0) {
-            while (cantidadNumero > this.stock || cantidadNumero <= 0 || Number.isNaN(cantidadNumero)) {
-                alert("ingrese una cantidad valida. Stock disponible: " + this.stock);
-                cantidadNumero = parseInt(prompt("Ingrese nueva cantidad a pedir."));
-            }
-            this.descuento();
-            alert("Se realizo su pedido de " + cantidadNumero + " unidades del producto " + this.nombre);
-            alert("El precio por esas unidades es de " + (this.precio * cantidadNumero));
-            if (carrito.findIndex(producto => (producto.id === this.id)) >= 0) {
-                carrito[carrito.findIndex(producto => (producto.id === this.id))].stock += cantidadNumero // verifico si ya hay un producto agregado de ese tipo sino hago push.
-            } else { carrito.push(new Producto(this.id, this.nombre, this.categoria, this.precio, cantidadNumero)) }  //agrego el objeto comprado al carrito.
-            this.stock -= cantidadNumero;
-            this.precio = precioOriginal; // devuelvo el precio original al producto.
-
-        } else {
-            alert("No tenemos stock disponible. Disculpe las molestias");
-        }
-    };
-}
-/*Funcion Para sacar el valor total del carrito*/
-function valorCarrito(carrito) {
-    const totalCarrito = (carrito.reduce((acumulador, producto) => acumulador + (producto.precio * producto.stock), 0) * 1.21).toFixed(2);
-    alert("el valor total de la compra es de: $" + totalCarrito)
-    return (totalCarrito)
 }
 
 /*Declaracion productos nuevos*/
-const producto1 = new Producto(01, "Procesador Intel i9", "Procesador","./images/i9.jpg", 300, 50);
-const producto2 = new Producto(02, "Procesador Amd Ryzen 7", "Procesador","./images/ryzen7.png", 150, 50);
-const producto3 = new Producto(03, "Placa de video Nvidia RTX2060", "Placa de video","./images/rtx2060.jpg", 650, 50);
-const producto4 = new Producto(04, "Placa de video Amd RX6700XT", "Placa de video","./images/rx6700xt.jpg", 335, 50);
-const producto5 = new Producto(05, "Memoria ram Kingstone", "Memoria ram","./images/kingstone.jpg", 260, 50);
-const producto6 = new Producto(06, "Memoria ram Adata", "Memoria ram","./images/adata.jpg", 180, 50);
+const producto1 = new Producto(1, "Procesador Intel i9", "Procesador","./images/i9.jpg","./images/i9Miniatura.jpg", 300, 50);
+const producto2 = new Producto(2, "Procesador Amd Ryzen 7", "Procesador","./images/ryzen7.png","./images/ryzen7Miniatura.png", 150, 50);
+const producto3 = new Producto(3, "Placa de video Nvidia RTX2060", "Placa de video","./images/rtx2060.jpg","./images/rtx2060Miniatura.jpg", 650, 50);
+const producto4 = new Producto(4, "Placa de video Amd RX6700XT", "Placa de video","./images/rx6700xt.jpg","./images/rx6700xtMiniatura.jpg", 335, 50);
+const producto5 = new Producto(5, "Memoria ram Kingstone", "Memoria ram","./images/kingstone.jpg","./images/kingstoneMiniatura.jpg", 260, 50);
+const producto6 = new Producto(6, "Memoria ram Adata", "Memoria ram","./images/adata.jpg","./images/adataMiniatura.jpg", 180, 50);
 let listaProductos = JSON.parse(localStorage.getItem("productos")) || [producto1, producto2, producto3, producto4, producto5, producto6]
 
-
-
-
-/*Funcion Crear nuevos productos*/
-
-function crearProducto() {
-    listaProductos.forEach(producto => { if (producto.id > aux) { aux = producto.id } }) // guardo en variable auxiliar el ultimo id asignado
-    let id = aux + 1;
-    let nombre = prompt("Cual es el nombre del producto?").toLowerCase();
-    let categoria = prompt("Cual es la categoria del producto?").toLowerCase();
-    let precio = parseFloat(prompt("Cual es el precio del producto?"));
-    while (precio <= 0 || Number.isNaN(precio)) {
-        alert("ingrese una precio valido.");
-        precio = parseFloat(prompt("Cual es el precio del producto?"));
+function cargarProductos(){
+    if(JSON.parse(localStorage.getItem("productos")) === null){
+        localStorage.setItem("productos",JSON.stringify(listaProductos))    //pusheo mi lista de productos a local storage si no hay nada.
     }
-    let stock = parseFloat(prompt("Cual es el stock del producto?"));
-    while (stock <= 0 || Number.isNaN(stock)) {
-        alert("ingrese una cantidad valida");
-        stock = parseInt(prompt("Cual es el stock del producto?"));
-    }
-    let productoNuevo = new Producto(id, nombre, categoria, precio, stock)
-    listaProductos.push(productoNuevo)
-    localStorage.setItem("productos",JSON.stringify(listaProductos))
-    alert("Producto " + nombre + " Creado.")
-}
-/*Inicio Definicion componentes PC y funciones para ingresar mas de 1 elemento*/
-function ingresarProcesador(marca, cantidad) {
-    let procesadorNuevo = marca.toLowerCase();
-    while ((procesadorNuevo != "amd") && (procesadorNuevo != "intel")) {
-        procesadorNuevo = prompt("elija una marca de procesador valida. intel($300) o amd($150)?").toLowerCase();
-    }
-    if (procesadorNuevo === "intel") {
-        producto1.comprar(cantidad)
-    } else {
-        producto2.comprar(cantidad)
-    }
-
-}
-
-function ingresarPlaca(marca, cantidad) {
-    let placaNueva = marca.toLowerCase();
-    while ((placaNueva != "nvidia") && (placaNueva != "amd")) {
-        placaNueva = prompt("elija una marca de placa de video valida. nvidia($650) o amd($335)?").toLowerCase();
-    }
-    if (placaNueva === "nvidia") {
-        producto3.comprar(cantidad)
-
-    } else {
-        producto4.comprar(cantidad)
-    }
-}
-
-function ingresarMemoria(marca, cantidad) {
-    let memoriaNueva = marca.toLowerCase();
-    while ((memoriaNueva != "kingstone") && (memoriaNueva != "segate")) {
-        memoriaNueva = prompt("elija una marca de memoria ram valida. kingstone($260) o adata($180)?").toLowerCase();
-    }
-    if (memoriaNueva === "kingstone") {
-        producto5.comprar(cantidad)
-    } else {
-        producto6.comprar(cantidad)
-    }
-}
-/*Mostrar los componentes elegidos en armar pc.*/
-function mostrarPc() {
-    carrito.forEach(producto => console.log(producto.categoria + " " + producto.nombre + " " + " " + producto.stock));
-}
-
-
-/*Inicio Funcio para armar una pc*/
-function armarPc() {
-    let procesadorPc = prompt("elija su marca de procesador. intel ($300) o amd($150)?").toLowerCase();
-    ingresarProcesador(procesadorPc, 1);
-    let placaPc = prompt("elija su marca de placa de video. nvidia($650) o amd($335)?").toLowerCase();
-    ingresarPlaca(placaPc, 1);
-    let memoriaPc = prompt("elija su marca de memoria ram. kingstone($260) o adata($180)?").toLowerCase();
-    ingresarMemoria(memoriaPc, 1);
-}
-/*Fin Funcio para armar una pc*/
-
-/*funcion para comprar diferentes componentes y cantidades*/
-
-function comprarComponentes() {
-    let agregarMas = "si"
-    let opcionComprar
-    while (agregarMas === "si") {
-        opcionComprar = parseInt(prompt("que quiere comprar? 1)Procesador 2)Placa de video 3)Memoria ram 4)Salir"));
-        while (opcionComprar != 1 && opcionComprar != 2 && opcionComprar != 3 && opcionComprar != 4) {
-            alert("Ingrese un valor valido");
-            opcionComprar = parseInt(prompt("que quiere comprar? 1)Procesador 2)Placa de video 3)Memoria ram"));
-        }
-        if (opcionComprar === 1) {
-            let opcionProcesador = prompt("elija una marca de procesador. intel($300) o amd($150)?").toLowerCase();
-            let cantidadComprar = parseInt(prompt("cuantos unidades quieres comprar?"));
-            ingresarProcesador(opcionProcesador, cantidadComprar);
-            agregarMas = prompt("Desea agregar mas productos? si/no").toLowerCase();
-            while (agregarMas != "si" && agregarMas != "no") {
-                alert("Valor ingresado no valido. Ingrese si o no.");
-                agregarMas = prompt("Desea agregar mas productos? si/no").toLowerCase();
-            }
-        } if (opcionComprar === 2) {
-            let opcionPlaca = prompt("elija una marca de placa de video. Nvidia($650) o Amd($335)?").toLowerCase();
-            let cantidadComprar = parseInt(prompt("cuantos unidades quieres comprar?"));
-            ingresarPlaca(opcionPlaca, cantidadComprar);
-            agregarMas = prompt("Desea agregar mas productos? si/no").toLowerCase();
-            while (agregarMas != "si" && agregarMas != "no") {
-                alert("Valor ingresado no valido. Ingrese si o no.");
-                agregarMas = prompt("Desea agregar mas productos? si/no").toLowerCase();
-            }
-        } if (opcionComprar === 3) {
-            let opcionMemoria = prompt("elija una marca de memoria Ram. kingstone($260) o adata($180)?").toLowerCase();
-            let cantidadComprar = parseInt(prompt("cuantos unidades quieres comprar?"));
-            ingresarMemoria(opcionMemoria, cantidadComprar);
-            agregarMas = prompt("Desea agregar mas productos? si/no").toLowerCase();
-            while (agregarMas != "si" && agregarMas != "no") {
-                alert("Valor ingresado no valido. Ingrese si o no.");
-                agregarMas = prompt("Desea agregar mas productos? si/no").toLowerCase();
-            }
-        } if (opcionComprar === 4) {
-            break
-        }
-    }
-    valorCarrito(carrito);
 }
 
 function mayuscula (palabra){
@@ -189,84 +45,199 @@ function mayuscula (palabra){
     return(capital)
 }
 
-function armarCard (lista){
+function armarCarrito (lista){
+    let contador = 0 //genero identificador de cantidad de productos
     lista.forEach(producto => {
-        div.innerHTML += `<div class="card productos_estilo" style="width: 18rem;">
-                        <img src="${producto.imagen}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">${producto.nombre}</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Comprar</a>
-                        </div>
-                        </div>
-                        `
+        div.innerHTML += `<div class="card productos_estilo" id="prod${producto.id}" style="width: 18rem;">
+        <img src="${producto.imagen}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">${producto.nombre}</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <p class="card-text">Precio: ${producto.precio}</p>
+            <a class="btn btn-primary" id="comprar${contador}">Comprar</a>
+            <input type="button" id="restar${contador}" value="-">
+            <input type="number" class="cantidad" id="cantidad${contador}" value=1 />
+            <input type="button" id="sumar${contador}" value="+">
+
+        </div>
+        <span id="problema${producto.id}"></span>
+        </div>
+        `
+        contador += 1
     })
+    restar()  // genero eventos de boton restar
+    sumar()   // genero eventos de boton sumar
+    comprar() // genero eventos de boton comprar
 }
+
 /*Defino los productos standar de la web*/
 function mostrarProductos() {
-    let listaFiltro = listaProductos.filter(producto => producto.nombre.includes(filtro.value)) //filtro in line
+    let listaFiltro = listaProductos.filter(producto => producto.nombre.includes(filtro.value)) //filtro
+    cargarProductos()
     if (listaFiltro.length == 0) {
         listaFiltro = listaProductos.filter(producto => producto.nombre.includes(mayuscula(filtro.value))) // verifico si puso la primera letra mayuscula
         if (listaFiltro.length == 0) {
             listaFiltro = listaProductos.filter(producto => producto.nombre.includes(filtro.value.toLowerCase())) // verifico si no uso mayusculas
             if (listaFiltro.length == 0) {
                 div.innerHTML = `<img src="./images/productoNoEncontrado.jpg">`
-            } else{
-                listaFiltro = listaProductos.filter(producto => producto.nombre.includes(filtro.value.toLowerCase())) // sino filtro , limpio el div y ingreso cada item del array filtrado
-        div.innerHTML = ""
-        armarCard(listaFiltro)
-            }
+            } 
         } else {
             listaFiltro = listaProductos.filter(producto => producto.nombre.includes(mayuscula(filtro.value))) // sino filtro , limpio el div y ingreso cada item del array filtrado
-        div.innerHTML = ""
-        armarCard(listaFiltro)
+            console.log("estoy en el segundo else.")
+            if (parseInt(min.value) >=0) {  // verifico si el campo minimo tiene un valor valido
+                validaRango.innerHTML = "" // borro mensaje de error
+                min.classList.remove("error") //borro clase error
+                listaFiltro = listaFiltro.filter(producto =>producto.precio >=  min.value) // filtro por los valores declarados en precios.
+                if(parseInt(max.value) > 0){  // verifico si el campo maximo tiene un valor valido
+                    if(parseInt(min.value) <= parseInt(max.value)){ // verifico que el campo minimo no sea mayor al campo maximo
+                        validaRango.innerHTML = ""
+                        max.classList.remove("error")
+                        listaFiltro = listaFiltro.filter(producto =>producto.precio <=  max.value) // filtro por los valores declarados en precios.
+                        div.innerHTML = ""
+                        armarCarrito(listaFiltro)
+                    } else{  // error valor minimo mayor a valor maximo
+                        validaRango.innerHTML = "Error! el valor minimo no puede ser mayor maximo!"
+                        min.className = "error"
+                        max.className = "error"
+                    }
+                } else {    // error por valor maximo vacio o menor a 1
+                    validaRango.innerHTML = "Error! el valor maximo no puede ser menor a 1 o vacio!"
+                    max.className = "error"
+                }
+            } else {    // errror valor minimo menor a 0
+                validaRango.innerHTML = "Error! el valor minimo no puede ser menor a 0 o vacio!"
+                min.className = "error"
+            }
         }
     } else {
-        listaFiltro = listaProductos.filter(producto => producto.nombre.includes(filtro.value)) // sino filtro , limpio el div y ingreso cada item del array filtrado
-        div.innerHTML = ""
-        armarCard(listaFiltro)
+        console.log("estoy en el tercer else.")
+        if (parseInt(min.value) >=0) {
+            validaRango.innerHTML = ""
+            min.classList.remove("error")
+            listaFiltro = listaFiltro.filter(producto =>producto.precio >=  min.value) // filtro por los valores declarados en precios.
+            if(max.value > 0){
+                if(parseInt(min.value) <= parseInt(max.value)){
+                    validaRango.innerHTML = ""
+                    max.classList.remove("error")
+                    listaFiltro = listaFiltro.filter(producto =>producto.precio <=  max.value) // filtro por los valores declarados en precios.
+                    div.innerHTML = ""
+                    armarCarrito(listaFiltro)
+                } else{     // error valor minimo mayor a valor maximo
+                    validaRango.innerHTML = "Error! el valor minimo no puede ser mayor maximo!"
+                    min.className = "error"
+                    max.className = "error"
+                }
+            } else {    // error por valor maximo vacio o menor a 1
+                validaRango.innerHTML = "Error! el valor maximo no puede ser menor a 1 o vacio!"
+                max.className = "error"
+            }
+        } else {    // errror valor minimo menor a 0
+                validaRango.innerHTML = "Error! el valor minimo no puede ser menor a 0 o vacio!"
+                min.className = "error"
+        }
     }
 }
-listaProductos.forEach(producto => {
-    div.innerHTML += `<div class="card productos_estilo" style="width: 18rem;">
-                    <img src="${producto.imagen}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">${producto.nombre}</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Comprar</a>
-                    </div>
-                    </div>
-                    `
-})
 
-filtro.addEventListener("keyup",mostrarProductos)
-
-/*funcion para comprar pc*/
-
-function comprarPc() {
-    do {
-        if (JSON.parse(localStorage.getItem("productos")) == null){
-            localStorage.setItem("productos",JSON.stringify(listaProductos))
-        }
-        inputComprar = parseInt(prompt("Desea: 1)Armar una computadora 2)Comprar Componentes 3)Ver total de compras 4)Crear producto 5)Salir"));
-        while (inputComprar != 1 && inputComprar != 2 && inputComprar != 3 && inputComprar != 4 && inputComprar != 5) {
-            alert("Valor ingresado no valido.");
-            inputComprar = parseInt(prompt("Desea: 1)Armar una computadora 2)Comprar Componentes 3)Salir"));
-        }
-        if (inputComprar === 1) {
-            armarPc();
-            mostrarPc();
-            valorCarrito(carrito); // agregar solo valor carrito al salir (3) y solo si el carrito no es vacio. 
-        } if (inputComprar === 2) {
-            comprarComponentes();
-        } if (inputComprar === 3) {
-            valorCarrito(carrito);
-        } if (inputComprar === 4) {
-            crearProducto();
-        }
-    } while (inputComprar !== 5)
-    alert("Gracias, vuelva pronto!.");
+/*Funcion para boton de restar cantidad*/
+function restar(){
+    const botonesResta = document.querySelectorAll('[id^=restar]')  // busco todos mis botones de restar cantidad
+    const inputsCantidad = document.querySelectorAll('[id^=cantidad]') // busco todos mis inputs de cantidad
+    botonesResta.forEach(btn => {                                   // por cada boton restar genero un evento para restar al input correspondiente
+        btn.addEventListener('click', event => {
+             if(inputsCantidad[btn.id.slice(6)].value > 0){
+                 inputsCantidad[btn.id.slice(6)].value --  // separo el id de restar para sacar el numero identificador
+             }
+        });
+     
+     });
 }
 
+/*Funcion para boton de sumar cantidad*/
+function sumar(){
+    const botonesSumar = document.querySelectorAll('[id^=sumar]')   // busco todos mis botones de sumar cantidad
+    const inputsCantidad = document.querySelectorAll('[id^=cantidad]') // busco todos mis inputs de cantidad
+    botonesSumar.forEach(btn => {                                   // por cada boton restar genero un evento para sumar al input correspondiente
+        btn.addEventListener('click', event => {
+             if(inputsCantidad[btn.id.slice(5)].value >= 0){
+                 inputsCantidad[btn.id.slice(5)].value ++  // separo el id de restar para sacar el numero identificador
+             }
+        });
+     
+     });
+}
 
-setTimeout(comprarPc, 100);
+function comprar(){
+    let listaFiltros = JSON.parse(localStorage.getItem("productos")) // probar sice 0 de array anterior o spread operator.
+    const botonesComprar = document.querySelectorAll('[id^=comprar]')  // busco todos mis botones de comprar
+    const inputsCantidad = document.querySelectorAll('[id^=cantidad]') // busco todos mis inputs de cantidad
+    const productos = document.querySelectorAll('[id^=prod]')
+    const errores = document.querySelectorAll('[id^=problema]')
+
+    botonesComprar.forEach(btn => {                                   // por cada boton restar genero un evento para restar al input correspondiente
+        let idProducto = btn.id.slice(7)    // busco mi id de boton y lo corto para que me de el numero de objeto.
+        let idListaProducto = parseInt(productos[idProducto].id.slice(4))   // busco mi id de producto que corresponde a la lista de productos.
+        //console.log(productos)
+        btn.addEventListener('click', event => {    //evento click para comprar
+            carrito = JSON.parse(localStorage.getItem("carrito")) || []
+            if (inputsCantidad[idProducto].value > (listaProductos[listaProductos.findIndex(producto => (producto.id === idListaProducto))].stock)){ //verifico si pido mas de mi stock
+                errores[idProducto].innerHTML = `No tenemos suficiente stock!`
+                console.log("Stock menor a lo pedido!")
+            } else{
+                errores[idProducto].innerHTML = "" //limpio el mensaje de error
+             if(inputsCantidad[idProducto].value > 0){ // verifico que el input no sea 0
+                errores[idProducto].innerHTML = ""
+                 let prodAux = listaFiltros.filter(producto =>producto.id ===  idListaProducto)[0]  // filtro el producto seleccionado y lo guardo en un auxiliar
+                 if (carrito.findIndex(producto => (producto.id === idListaProducto)) >= 0) {   //si el producto ya esta en el carrito sumo stock, si no pusheo un objeto
+                    carrito[carrito.findIndex(producto => (producto.id === idListaProducto))].stock += parseInt(inputsCantidad[idProducto].value) // agrego el stock al carrito
+                    listaProductos[listaProductos.findIndex(producto => (producto.id === idListaProducto))].stock -= parseInt(inputsCantidad[idProducto].value) // disminuyo stock en el producto original
+                    localStorage.setItem("productos",JSON.stringify(listaProductos))
+                    localStorage.setItem("carrito",JSON.stringify(carrito))
+                    mostrarAlerta(prodAux.nombre,inputsCantidad[idProducto].value)
+                } else {    // si el producto no esta en el carrito hago push
+                    listaProductos[listaProductos.findIndex(producto => (producto.id === idListaProducto))].stock -= parseInt(inputsCantidad[idProducto].value) // disminuyo stock en el producto original
+                    prodAux.stock = parseInt(inputsCantidad[idProducto].value) // seteo cuanto stock compro
+                    carrito.push(prodAux)
+                    localStorage.setItem("productos",JSON.stringify(listaProductos))
+                    localStorage.setItem("carrito",JSON.stringify(carrito))
+                    mostrarAlerta(prodAux.nombre,inputsCantidad[idProducto].value)
+                    }
+             } else{
+                errores[idProducto].innerHTML = `No puedes pedir 0!`
+             }}
+        });
+     
+     });
+}
+
+filtro.addEventListener("keyup", function (e){     //apretar enter genera la busqueda
+    if (e.key === 'Enter') {
+        mostrarProductos()
+      }
+})
+
+btn.addEventListener("click", mostrarProductos) // boton buscar
+
+/*Funciones para alertas*/
+function mostrarAlerta(producto,cantidad){
+    document.getElementById("alerta").classList.remove("alertaBorrar")  //saco class que deja opacidad 0%.
+                    document.getElementById("alerta").innerHTML = `
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Se agrego ${cantidad} ${producto} al carrito.</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+                    `                                                   // Genero la ventana modal.
+                    document.getElementById("alerta").classList.add("alertaMostrar")// agrego class para mostrar la ventana 100% opacidad.
+                    setTimeout(cerrarAlerta, 3000);                     // luego de 3 segundos borro la ventana modal.
+}
+
+function cerrarAlerta(){
+    document.getElementById("alerta").classList.add("alertaBorrar")
+    setTimeout(borrarAlerta,3000)
+}
+
+function borrarAlerta(){
+    document.getElementById("alerta").innerHTML =""
+}
+
+//setTimeout(comprarPc, 100);
+mostrarProductos()

@@ -10,6 +10,14 @@ nav ul li {
   list-style-type: none;
 }
 
+.filtro {
+  background: white;
+  opacity: 0.8;
+  padding: 5px;
+  border: 5px solid black;
+  margin-bottom: 20px;
+}
+
 .center_nav {
   justify-content: space-evenly;
 }
@@ -34,7 +42,7 @@ nav ul li {
 
 .titulos_h1 {
   margin-top: 50px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .redes {
@@ -45,7 +53,60 @@ nav ul li {
 
 .productos_estilo {
   margin-bottom: 15px;
-  margin-left: 15px;
+  border: 5px solid rgb(250, 163, 2);
+}
+
+.rango_precio {
+  display: flex;
+  flex-direction: column;
+}
+
+.contenedor_prod {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.cantidad {
+  width: 50px;
+}
+
+/*.itemCarrito{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+
+}
+
+.pCarrito{
+    margin-left: 20px;
+}
+
+.pNombreProducto{
+    width: 177px;
+}*/
+.error_rango {
+  color: red;
+}
+
+.error {
+  border: solid red 2px;
+}
+
+#alerta {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  transition: all 3s;
+}
+
+.alertaBorrar {
+  opacity: 0% !important;
+}
+
+.alertaMostrar {
+  opacity: 100%;
 }
 
 /*Inicio Grids Index*/
@@ -78,6 +139,7 @@ header {
   flex-wrap: wrap;
   min-height: 432px;
   margin-bottom: 23px;
+  max-width: 1212px;
 }
 
 .grids {
@@ -115,7 +177,117 @@ footer {
 
 .carrito {
   width: 50%;
-  height: 300px;
   background-color: white;
-  margin-bottom: 30px;
+  margin-bottom: 397px;
+  padding: 90px;
+  border-radius: 150px;
+}
+
+.itemCarrito {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.pCarrito {
+  margin-left: 31px;
+}
+
+.pNombreProducto {
+  width: 177px;
+  margin-left: 10px;
+}
+
+.imgCarrito {
+  border-radius: 150px;
+}
+
+.titulosCarrito {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.itemVacio {
+  min-height: 200px;
+}
+
+.botonesCarrito {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.totalTexto {
+  border: solid;
+  padding: 5px;
+  border-radius: 150px;
+}
+
+.totalCarrito {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+#boton_vaciar, #boton_comprar {
+  border-radius: 150px;
+}
+
+.tituloImagen {
+  margin-left: 41px;
+}
+
+.tituloDesc {
+  margin-left: 107px;
+}
+
+.tituloPrecio {
+  margin-left: 82px;
+}
+
+.tituloCant {
+  margin-left: 14px;
+}
+
+.tituloTotal {
+  margin-left: 18px;
+}
+
+@media screen and (min-width: 576px) {
+  .productos_estilo {
+    margin-left: 15px;
+  }
+}
+@media screen and (min-width: 606px) {
+  .grid3 {
+    min-height: 427px;
+  }
+  .rango_precio {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+@media screen and (min-width: 768px) {
+  .grid3 {
+    min-height: 424px;
+  }
+}
+@media screen and (min-width: 992px) {
+  .grid3 {
+    min-height: 420px;
+  }
+}
+@media screen and (min-height: 1024px) {
+  .grid3 {
+    min-height: 419px;
+  }
+}
+@media screen and (min-width: 1218px) {
+  .grid3 {
+    min-height: 416px;
+  }
 }/*# sourceMappingURL=style.css.map */

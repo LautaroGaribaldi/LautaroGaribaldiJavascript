@@ -30,16 +30,22 @@
         </div>
         <main>
             <aside class="grid2">
-                <form>
-                    <input type="text" id="nombre" />
+                <form class="filtro">
+                    <input type="text" id="nombre" placeholder="Escribe que buscas!" />
+                    <input type="button" id="boton_buscar" value="Buscar">
+                    <p>Precios entre</p>
+                    <div class="rango_precio" id="rango">
+                        <input type="text" id="minimo" placeholder="minimo" value=0 />
+                        <span>--</span>
+                        <input type="text" id="maximo" placeholder="maximo" value=1000 /></div>
+                    <span id="error_rango" class="error_rango"></span>
                 </form>
-                <p>filtro2</p>
-                <p>filtro3</p>
-                <p>filtro4</p>
             </aside>
-            <div id="contenedor" class="grid3">
+            <div class="contenedor_prod">
+                <div id="contenedor" class="grid3"></div>
             </div>
         </main>
+        <span id="alerta" class="alertaBorrar"></span>
         <footer>
             <div class="redes">
                 <a href="https://www.facebook.com/lautaroxs/" target="_blank"><img src="./images/icono_facebook.svg"
