@@ -178,9 +178,11 @@ footer {
 .carrito {
   width: 50%;
   background-color: white;
-  margin-bottom: 397px;
-  padding: 90px;
+  margin-bottom: 150px;
+  padding: 45px;
   border-radius: 150px;
+  min-width: 276px;
+  max-width: 341px;
 }
 
 .itemCarrito {
@@ -188,10 +190,11 @@ footer {
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
 }
 
 .pCarrito {
-  margin-left: 31px;
+  margin-right: 31px;
 }
 
 .pNombreProducto {
@@ -207,10 +210,14 @@ footer {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  display: none;
 }
 
 .itemVacio {
   min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .botonesCarrito {
@@ -241,7 +248,7 @@ footer {
 }
 
 .tituloDesc {
-  margin-left: 107px;
+  margin-left: 84px;
 }
 
 .tituloPrecio {
@@ -275,6 +282,9 @@ footer {
   .grid3 {
     min-height: 424px;
   }
+  .carrito {
+    margin-bottom: 293px;
+  }
 }
 @media screen and (min-width: 992px) {
   .grid3 {
@@ -289,5 +299,18 @@ footer {
 @media screen and (min-width: 1218px) {
   .grid3 {
     min-height: 416px;
+  }
+  .titulosCarrito {
+    display: flex;
+  }
+}
+@media screen and (min-height: 1024px) {
+  .carrito {
+    margin-bottom: 355px;
+  }
+}
+@media screen and (min-height: 1080px) {
+  .carrito {
+    margin-bottom: 403px;
   }
 }/*# sourceMappingURL=style.css.map */

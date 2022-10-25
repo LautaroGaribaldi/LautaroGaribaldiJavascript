@@ -18,6 +18,10 @@
     .grid3{
         min-height: 424px;
     }
+
+    .carrito{
+        margin-bottom: 293px;
+    }
 }
 
 @media screen and (min-width:992px){
@@ -37,4 +41,26 @@
         min-height: 416px;
     }
     
+    .titulosCarrito{
+        display:flex
+    }
+}
+
+@media screen and (min-width:1920px) {
+
+    .carrito{
+        //margin-bottom: 500px;
+    }
+}
+
+@media screen and (min-height:1024px){
+    .carrito{
+        margin-bottom: 355px;
+    }
+}
+
+@media screen and (min-height:1080px){
+    .carrito{
+        margin-bottom: 403px;
+    }
 }
