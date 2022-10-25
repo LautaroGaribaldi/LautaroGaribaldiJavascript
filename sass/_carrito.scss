@@ -1,8 +1,6 @@
 .carrito{
     width: 50%;
-    //height: 300px;
     background-color: white;
-    //margin-bottom: 397px;
     margin-bottom: 150px;
     padding: 45px;
     border-radius: 150px;
@@ -39,7 +37,6 @@
     display: none;
 }
 .carritoVacio{
-        //margin-bottom: 403px;
 }
 
 .itemVacio{
@@ -54,8 +51,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-end;
-    //width: 50%;
-    //margin-bottom: 397px;
 }
 
 .totalTexto{

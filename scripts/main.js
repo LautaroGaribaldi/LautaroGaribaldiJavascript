@@ -47,6 +47,7 @@ function mayuscula (palabra){
 
 function armarCarrito (lista){
     let contador = 0 //genero identificador de cantidad de productos
+    div.classList.remove("busquedaFallida")
     lista.forEach(producto => {
         div.innerHTML += `<div class="card productos_estilo" id="prod${producto.id}" style="width: 18rem;">
         <img src="${producto.imagen}" class="card-img-top" alt="...">
@@ -79,7 +80,13 @@ function mostrarProductos() {
         if (listaFiltro.length == 0) {
             listaFiltro = listaProductos.filter(producto => producto.nombre.includes(filtro.value.toLowerCase())) // verifico si no uso mayusculas
             if (listaFiltro.length == 0) {
-                div.innerHTML = `<img src="./images/productoNoEncontrado.jpg">`
+                div.classList.add("busquedaFallida")
+                div.innerHTML = `
+                <picture>
+                <source srcset="./images/productoNoEncontrado.jpg" media="(min-width:600px)">
+                <img src="./images/productoNoEncontrado220.jpg" class="busquedaFallida">
+                </picture>
+                `
             } 
         } else {
             listaFiltro = listaProductos.filter(producto => producto.nombre.includes(mayuscula(filtro.value))) // sino filtro , limpio el div y ingreso cada item del array filtrado

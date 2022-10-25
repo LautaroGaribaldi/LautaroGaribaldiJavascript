@@ -70,23 +70,6 @@ nav ul li {
 .cantidad{
     width: 50px;
 }
-
-/*.itemCarrito{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    
-}
-
-.pCarrito{
-    margin-left: 20px;
-}
-
-.pNombreProducto{
-    width: 177px;
-}*/
-
 .error_rango{
     color: red;
 }
@@ -108,4 +91,8 @@ nav ul li {
 
 .alertaMostrar{
     opacity: 100%;
+}
+
+.busquedaFallida{
+    min-height: 220px !important;
 }
