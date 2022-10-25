@@ -296,6 +296,7 @@ footer {
     max-width: 612px;
   }
 }
+/*medias querry para el footer*/
 @media screen and (min-height: 1024px) {
   .carrito {
     margin-bottom: 355px;

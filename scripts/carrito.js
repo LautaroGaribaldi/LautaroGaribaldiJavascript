@@ -3,14 +3,14 @@ let listaProductos = JSON.parse(localStorage.getItem("productos")) || []
 let contenedor = document.getElementById("carrito")
 //let vaciarCarrito = document.getElementById("boton_vaciar")
 
-function armarCarrito (lista){
-    if(carrito.length === 0){
+function armarCarrito(lista) {
+    if (carrito.length === 0) {
         //contenedor.classList.add("carritoVacio")
-            contenedor.innerHTML = `<div class="itemVacio">
+        contenedor.innerHTML = `<div class="itemVacio">
             <p class="pNombreProducto">Carrito Vacio =(</p>  
             </div>
             `
-        
+
     } else {
         lista.forEach(producto => {
             contenedor.innerHTML += `<div class="itemCarrito" id="${producto.id}">
@@ -23,7 +23,7 @@ function armarCarrito (lista){
             <hr>
             `
         })
-        const carritoTotal = carrito.reduce((acumulador, producto) => acumulador + (producto.precio * producto.stock),0 )
+        const carritoTotal = carrito.reduce((acumulador, producto) => acumulador + (producto.precio * producto.stock), 0)
         contenedor.innerHTML += `<div class = "totalCarrito"><p class = "totalTexto">Total Carrito: $${carritoTotal}</p></div>
         <div class="botonesCarrito">
         <input type="button" id="boton_vaciar" value="Vaciar carrito">
@@ -32,16 +32,16 @@ function armarCarrito (lista){
         `
         let vaciarCarrito = document.getElementById("boton_vaciar")
         let comprar = document.getElementById("boton_comprar")
-        vaciarCarrito.addEventListener("click",borrarCarrito)
-        comprar.addEventListener("click",comprarCarrito)
+        vaciarCarrito.addEventListener("click", borrarCarrito)
+        comprar.addEventListener("click", comprarCarrito)
     }
 }
 
-function borrarCarrito(){
+function borrarCarrito() {
     carrito.forEach(producto => {
         if (listaProductos.findIndex(productos => (productos.id === producto.id)) >= 0) {
             listaProductos[(listaProductos.findIndex(productos => (productos.id === producto.id)))].stock += producto.stock
-            localStorage.setItem("productos",JSON.stringify(listaProductos))
+            localStorage.setItem("productos", JSON.stringify(listaProductos))
             console.log(listaProductos[(listaProductos.findIndex(productos => (productos.id === producto.id)))].stock)
         }
     })
@@ -50,11 +50,11 @@ function borrarCarrito(){
     armarCarrito(carrito)
 }
 
-function comprarCarrito(){
+function comprarCarrito() {
     carrito.forEach(producto => {
         if (listaProductos.findIndex(productos => (productos.id === producto.id)) >= 0) {
             listaProductos[(listaProductos.findIndex(productos => (productos.id === producto.id)))].stock += producto.stock
-            localStorage.setItem("productos",JSON.stringify(listaProductos))
+            localStorage.setItem("productos", JSON.stringify(listaProductos))
             console.log(listaProductos[(listaProductos.findIndex(productos => (productos.id === producto.id)))].stock)
         }
     })
@@ -64,25 +64,25 @@ function comprarCarrito(){
     mostrarAlerta()
 }
 
-function mostrarAlerta(){
+function mostrarAlerta() {
     document.getElementById("alerta").classList.remove("alertaBorrar")  //saco class que deja opacidad 0%.
-                    document.getElementById("alerta").innerHTML = `
+    document.getElementById("alerta").innerHTML = `
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
   <strong>Gracias por su compra!.</strong>
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
                     `                                                   // Genero la ventana modal.
-                    document.getElementById("alerta").classList.add("alertaMostrar")// agrego class para mostrar la ventana 100% opacidad.
-                    setTimeout(cerrarAlerta, 3000);                     // luego de 3 segundos borro la ventana modal.
+    document.getElementById("alerta").classList.add("alertaMostrar")// agrego class para mostrar la ventana 100% opacidad.
+    setTimeout(cerrarAlerta, 3000);                     // luego de 3 segundos borro la ventana modal.
 }
 
-function cerrarAlerta(){
+function cerrarAlerta() {
     document.getElementById("alerta").classList.add("alertaBorrar")
-    setTimeout(borrarAlerta,3000)
+    setTimeout(borrarAlerta, 3000)
 }
 
-function borrarAlerta(){
-    document.getElementById("alerta").innerHTML =""
+function borrarAlerta() {
+    document.getElementById("alerta").innerHTML = ""
 }
 
 //vaciarCarrito.addEventListener("click",borrarCarrito) // boton buscar
