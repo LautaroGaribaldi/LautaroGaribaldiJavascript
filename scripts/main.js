@@ -83,7 +83,7 @@ function mostrarProductos() {
                 div.classList.add("busquedaFallida")
                 div.innerHTML = `
                 <picture>
-                <source srcset="./images/productoNoEncontrado.jpg" media="(min-width:600px)">
+                <source srcset="./images/productoNoEncontrado.jpg" media="(min-width:800px)">
                 <img src="./images/productoNoEncontrado220.jpg" class="busquedaFallida">
                 </picture>
                 `
