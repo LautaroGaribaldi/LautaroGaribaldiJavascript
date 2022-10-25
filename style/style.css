@@ -307,15 +307,13 @@ footer {
     max-width: 612px;
   }
 }
-/*
-@media screen and (min-height:1024px){
-    .carrito{
-        margin-bottom: 355px;
-    }
+@media screen and (min-height: 1024px) {
+  .carrito {
+    margin-bottom: 355px;
+  }
 }
-
-@media screen and (min-height:1080px){
-    .carrito{
-        margin-bottom: 403px;
-    }
-}*//*# sourceMappingURL=style.css.map */
+@media screen and (min-height: 1080px) {
+  .carrito {
+    margin-bottom: 403px;
+  }
+}/*# sourceMappingURL=style.css.map */
