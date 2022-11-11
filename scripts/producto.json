@@ -1,8 +1,8 @@
 [
-    {"id": 1, "nombre": "Procesador Intel i9", "categoria": "Procesador", "imagen": "./images/i9.jpg","miniatura": "./images/i9Miniatura.jpg","precio": 300,"stock": 50},
-    {"id": 2, "nombre": "Procesador Amd Ryzen 7", "categoria": "Procesador", "imagen": "./images/ryzen7.png","miniatura": "./images/ryzen7Miniatura.png","precio": 150,"stock": 50},
-    {"id": 3, "nombre": "Placa de video Nvidia RTX2060", "categoria": "Placa de video", "imagen": "./images/rtx2060.jpg","miniatura": "./images/rtx2060Miniatura.jpg","precio": 650,"stock": 50},
-    {"id": 4, "nombre": "Placa de video Amd RX6700XT", "categoria": "Placa de video", "imagen": "./images/rx6700xt.jpg","miniatura": "./images/rx6700xtMiniatura.jpg","precio": 335,"stock": 50},
-    {"id": 5, "nombre": "Memoria ram Kingstone", "categoria": "Memoria ram", "imagen": "./images/kingstone.jpg","miniatura": "./images/kingstoneMiniatura.jpg","precio": 260,"stock": 50},
-    {"id": 6, "nombre": "Memoria ram Adata", "categoria": "Memoria ram", "imagen": "./images/adata.jpg","miniatura": "./images/adataMiniatura.jpg","precio": 180,"stock": 50}
+    {"id": 1, "nombre": "Procesador Intel i9", "categoria": "Procesador", "descripcion": "Procesador Intel i9 5.2 GHz","imagen": "./images/i9.jpg","miniatura": "./images/i9Miniatura.jpg","precio": 300,"stock": 50},
+    {"id": 2, "nombre": "Procesador Amd Ryzen 7", "categoria": "Procesador", "descripcion": "Procesador AMD Ryzen 7 4.6 GHz", "imagen": "./images/ryzen7.png","miniatura": "./images/ryzen7Miniatura.png","precio": 150,"stock": 50},
+    {"id": 3, "nombre": "Placa de video Nvidia RTX2060", "categoria": "Placa de video", "descripcion": "Placa de video Zotac Nvidia RTX2060 6GB", "imagen": "./images/rtx2060.jpg","miniatura": "./images/rtx2060Miniatura.jpg","precio": 650,"stock": 50},
+    {"id": 4, "nombre": "Placa de video Amd RX6700XT", "categoria": "Placa de video", "descripcion": "Placa de video AMD RTX6700XT 4GB", "imagen": "./images/rx6700xt.jpg","miniatura": "./images/rx6700xtMiniatura.jpg","precio": 335,"stock": 50},
+    {"id": 5, "nombre": "Memoria ram Kingstone", "categoria": "Memoria ram", "descripcion": "Memoria Ram Kingstone Fury 8GB DDR4", "imagen": "./images/kingstone.jpg","miniatura": "./images/kingstoneMiniatura.jpg","precio": 260,"stock": 50},
+    {"id": 6, "nombre": "Memoria ram Adata", "categoria": "Memoria ram", "descripcion": "Memoria Ram Adata  4GB DDR4", "imagen": "./images/adata.jpg","miniatura": "./images/adataMiniatura.jpg","precio": 180,"stock": 50}
 ]

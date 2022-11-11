@@ -67,7 +67,7 @@ function armarCard(lista) {
         <img src="${producto.imagen}" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title">${producto.nombre}</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <p class="card-text">${producto.descripcion}</p>
             <p class="card-text">Precio: ${producto.precio}</p>
             <a class="btn btn-primary" id="comprar${contador}">Comprar</a>
             <input type="button" id="restar${contador}" value="-">
